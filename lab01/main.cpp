@@ -30,7 +30,7 @@ double intersection(math_f f, double x0 = .0) {
             break;
         curr = next;
     }
-    throw std::runtime_error{"Cannot get enough accuracy"};
+    throw std::runtime_error{"cannot get enough accuracy"};
 }
 
 double intersection(math_f f, math_f g, double x0 = .0) {
