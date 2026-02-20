@@ -6,8 +6,8 @@
 using math_f = std::function<double(double)>;
 
 constexpr double g_derivative_eps = 0.00001;
-constexpr double g_newton_method_eps = 0.001;
-constexpr size_t g_newton_method_max_iter = 1'000;
+constexpr double g_newton_method_eps = 0.00001;
+constexpr size_t g_newton_method_max_iter = 10'000;
 constexpr size_t g_integration_steps = 10'000;
 constexpr size_t g_output_precision = 10;
 
@@ -57,7 +57,7 @@ double f(double x) { return x; }
 double g(double x) { return x * x - 2.0; }
 
 int main() {
-    double a = intersection(f, g);
+    double a = intersection(f, g, -10);
     double b = intersection(f, g, 10);
     if (b < a)
         std::swap(a, b);
