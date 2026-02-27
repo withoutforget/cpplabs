@@ -91,7 +91,7 @@ int main() {
         y{{0, 0}, {3, 3}, {4, 4}};
     std::multiset<int> m1{1, 1, 2, 3}, m2{2, 2, 2, 3, 3, 5};
 
-    std::cout << "=== Small demo ===" << std::endl;
+    std::cout << std::endl;
     output("vector 1", a);
     output("vector 2", b);
     output("vector", concat(a, b));
@@ -108,8 +108,8 @@ int main() {
     output("multiset 2", m2);
     output("multiset", concat(m1, m2));
 
-    std::cout << "\n=== Performance test (N=" << N
-              << ") ===" << std::endl;
+    std::cout << std::endl;
+    std::cout << std::format("----->iters={}\n", N);
 
     benchmark("vector", []() {
         std::vector<int> v1, v2;
