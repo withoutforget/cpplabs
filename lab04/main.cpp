@@ -1,11 +1,12 @@
 #include <algorithm>
+#include <iomanip>
 #include <iostream>
 #include <list>
 #include <map>
 #include <set>
 #include <vector>
 
-template <typename T>
+template <typename T, class Comp = std::less<T>>
 std::vector<T> concat(const std::vector<T>& lhs,
                       const std::vector<T>& rhs) {
     std::vector<T> result;
@@ -19,7 +20,7 @@ std::vector<T> concat(const std::vector<T>& lhs,
     return result;
 }
 
-template <typename T>
+template <typename T, class Comp = std::less<T>>
 std::list<T> concat(const std::list<T>& lhs,
                     const std::list<T>& rhs) {
     std::list<T> result;
@@ -48,6 +49,25 @@ std::multiset<K> concat(const std::multiset<K>& lhs,
     return res;
 }
 
+template <typename K, typename V>
+// make concepts for this shit for cont
+void output(std::string_view title, std::map<K, V> cont) {
+    std::cout << std::setw(12) << title << " | ";
+    for (const auto& [k, v] : cont) {
+        std::cout << k << "=" << v << ", ";
+    }
+    std::cout << std::endl;
+}
+
+template <typename Cont>
+void output(std::string_view title, Cont&& cont) {
+    std::cout << std::setw(12) << title << " | ";
+    for (auto&& v : std::forward<Cont>(cont)) {
+        std::cout << v << ", ";
+    }
+    std::cout << std::endl;
+}
+
 int main() {
     std::vector<int> a{1, 2, 3}, b{0, 4, 5};
     std::list<int> c{1, 2, 3}, d{0, 4, 5};
@@ -55,19 +75,8 @@ int main() {
         y{{0, 0}, {3, 3}, {4, 4}};
     std::multiset<int> m1{1, 1, 2, 3}, m2{2, 2, 2, 3, 3, 5};
 
-    for (auto&& v : concat(a, b))
-        std::cout << v << ", ";
-    std::cout << std::endl;
-
-    for (auto&& v : concat(c, d))
-        std::cout << v << ", ";
-    std::cout << std::endl;
-
-    for (auto&& [k, v] : concat(x, y))
-        std::cout << k << "=" << v << "; ";
-    std::cout << std::endl;
-
-    for (auto&& v : concat(m1, m2))
-        std::cout << v << ", ";
-    std::cout << std::endl;
+    output("vector", concat(a, b));
+    output("list", concat(c, d));
+    output("map", concat(x, y));
+    output("multiset", concat(m1, m2));
 }
