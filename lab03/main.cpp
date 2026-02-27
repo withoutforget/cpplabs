@@ -66,6 +66,7 @@ public:
 using namespace std::string_view_literals;
 
 int main() {
+    // на момент выполнения работы в списках имею вариант 19
     UnaryBinaryDevice ub("unary-binary", 1);
     std::cout << ub.DeviceName() << std::endl;
     std::cout << ub.IOCount() << std::endl;
