@@ -20,11 +20,10 @@ MoneyData::MoneyData(MoneyData&& rhs) noexcept
 }
 
 MoneyData& MoneyData::operator=(const MoneyData& rhs) {
-    MoneyData tmp{rhs};
-    std::swap(*this, tmp);
+    m_rubles = rhs.m_rubles;
+    m_penny = rhs.m_penny;
     return *this;
 }
-
 MoneyData& MoneyData::operator=(MoneyData&& rhs) noexcept {
     std::swap(m_rubles, rhs.m_rubles);
     std::swap(m_penny, rhs.m_penny);

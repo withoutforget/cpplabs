@@ -24,5 +24,12 @@ int main() {
     Money quot = a / c;
     quot.print();
 
+    if (a > b)
+        a.print();
+    if (b < c)
+        b.print();
+    if (c == d)
+        c.print();
+
     return 0;
 }
