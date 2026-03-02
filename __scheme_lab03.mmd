@@ -1,0 +1,69 @@
+classDiagram
+    direction TB
+
+    class Device {
+        <<abstract>>
+        -string m_name
+        -size_t m_io_count
+        +DeviceName(): string
+        +IOCount(): size_t
+        +IsAvailable()* bool
+    }
+
+    class UnaryOpDevice {
+        <<abstract>>
+        #size_t m_unary_inputs
+        +DeviceName(): string
+        +UnaryOp(int)* int
+    }
+
+    class BinaryOpDevice {
+        <<abstract>>
+        #size_t m_binary_inputs
+        +DeviceName(): string
+        +BinaryOp(int, int)* int
+    }
+
+    class TernaryOpDevice {
+        <<abstract>>
+        #size_t m_ternary_inputs
+        +DeviceName(): string
+        +TernaryOp(int, int, int)* int
+    }
+
+    class UnaryBinaryDevice {
+        <<final>>
+        +IsAvailable() bool
+        +UnaryOp(int) int
+        +BinaryOp(int, int) int
+        +DeviceName() string
+        +IOCount() size_t
+    }
+
+    class BinaryTernaryDevice {
+        <<final>>
+        +IsAvailable() bool
+        +TernaryOp(int, int, int) int
+        +BinaryOp(int, int) int
+        +DeviceName() string
+        +IOCount() size_t
+    }
+
+    Device <|-- UnaryOpDevice : virtual
+    Device <|-- BinaryOpDevice : virtual
+    Device <|-- TernaryOpDevice : virtual
+
+    UnaryOpDevice <|-- UnaryBinaryDevice
+    BinaryOpDevice <|-- UnaryBinaryDevice
+
+    BinaryOpDevice <|-- BinaryTernaryDevice
+    TernaryOpDevice <|-- BinaryTernaryDevice
+
+    style Device fill:#f9f9f9,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+    style UnaryOpDevice fill:#f9f9f9,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+    style BinaryOpDevice fill:#f9f9f9,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+    style TernaryOpDevice fill:#f9f9f9,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+    
+    style UnaryBinaryDevice fill:#e1f5fe,stroke:#0277bd,stroke-width:4px
+    style BinaryTernaryDevice fill:#e1f5fe,stroke:#0277bd,stroke-width:4px
+
